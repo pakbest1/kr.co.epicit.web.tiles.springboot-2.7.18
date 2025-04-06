@@ -10,10 +10,10 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages={
 	"kr.co.epicit"
 })
-public class SpringBootWebApplication {
+public class SpringBootWebTilesApplication {
 
 	public static void main(String... args) {
-		SpringApplication.run( SpringBootWebApplication.class, args );
+		SpringApplication.run( SpringBootWebTilesApplication.class, args );
 	}
 	
 }
