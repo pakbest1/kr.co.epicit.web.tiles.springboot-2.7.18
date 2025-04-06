@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="tiles-default" template="/WEB-INF/views/_tiles/_layouts/default_layout.jsp">
+		<put-attribute name="header"    value="/WEB-INF/views/_tiles/_parts/default_header.jsp" />
+		<put-attribute name="footer"    value="/WEB-INF/views/_tiles/_parts/default_footer.jsp" />
+		<put-attribute name="body"      value="" />
+	</definition>
+	
+	<definition name="tiles-popup" template="/WEB-INF/views/_tiles_layouts/popup_layout.jsp">
+		<put-attribute name="header"  value="/WEB-INF/views/_tiles/_parts/popup_header.jsp" />
+		<put-attribute name="footer"  value="/WEB-INF/views/_tiles/_parts/popup_footer.jsp" />
+		<put-attribute name="body"    value="" />
+	</definition>
+	
+	<!-- 
+	<definition name="error" extends="tiles-default">
+		<put-attribute name="body" value="/WEB-INF/views/jsp/error.jsp" />
+	</definition>
+	-->
+	
+	<definition name="*" extends="tiles-default">
+		<put-attribute name="body" value="/WEB-INF/views/jsp/{1}.jsp" />
+	</definition>
+	<definition name="*/*" extends="tiles-default">
+		<put-attribute name="body" value="/WEB-INF/views/jsp/{1}/{2}.jsp" />
+	</definition>
+	<definition name="*/*/*" extends="tiles-default">
+		<put-attribute name="body" value="/WEB-INF/views/jsp/{1}/{2}/{3}.jsp" />
+	</definition>
+	<definition name="*/*/*/*" extends="tiles-default">
+		<put-attribute name="body" value="/WEB-INF/views/jsp/{1}/{2}/{3}/{4}.jsp" />
+	</definition>
+	
+	<definition name="*.popup" extends="tiles-popup">
+		<put-attribute name="body" value="/WEB-INF/views/jsp/popup/{1}.jsp" />
+	</definition>
+	<definition name="*/*.popup" extends="tiles-popup">
+		<put-attribute name="body" value="/WEB-INF/views/jsp/{1}/popup/{2}.jsp" />
+	</definition>
+	<definition name="*/*/*.popup" extends="tiles-popup">
+		<put-attribute name="body" value="/WEB-INF/views/jsp/{1}/{2}/popup/{3}.jsp" />
+	</definition>
+
+	
+</tiles-definitions>

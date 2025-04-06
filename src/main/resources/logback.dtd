@@ -1,0 +1,29 @@
+<!ELEMENT configuration (property+,appender+,logger+,root)>
+<!ATTLIST configuration scan NMTOKEN #REQUIRED>
+<!ATTLIST configuration scanPeriod CDATA #REQUIRED>
+<!ELEMENT property EMPTY>
+<!ATTLIST property name NMTOKEN #REQUIRED>
+<!ATTLIST property value CDATA #REQUIRED>
+<!ELEMENT appender (layout?,file?,rollingPolicy?,encoder?,appender-ref?)>
+<!ATTLIST appender name NMTOKEN #REQUIRED>
+<!ATTLIST appender class NMTOKEN #REQUIRED>
+<!ELEMENT layout (pattern)>
+<!ATTLIST layout class NMTOKEN #REQUIRED>
+<!ELEMENT pattern (#PCDATA)>
+<!ELEMENT file (#PCDATA)>
+<!ELEMENT rollingPolicy (fileNamePattern,maxFileSize,totalSizeCap,maxHistory)>
+<!ATTLIST rollingPolicy class NMTOKEN #REQUIRED>
+<!ELEMENT fileNamePattern (#PCDATA)>
+<!ELEMENT maxFileSize (#PCDATA)>
+<!ELEMENT totalSizeCap (#PCDATA)>
+<!ELEMENT maxHistory (#PCDATA)>
+<!ELEMENT encoder (pattern)>
+<!ELEMENT appender-ref EMPTY>
+<!ATTLIST appender-ref ref NMTOKEN #REQUIRED>
+<!ELEMENT logger (appender-ref*)>
+<!ATTLIST logger name NMTOKEN #REQUIRED>
+<!ATTLIST logger level NMTOKEN #REQUIRED>
+<!ATTLIST logger additivity NMTOKEN #IMPLIED>
+<!ATTLIST logger additive NMTOKEN #IMPLIED>
+<!ELEMENT root (appender-ref+)>
+<!ATTLIST root level NMTOKEN #REQUIRED>

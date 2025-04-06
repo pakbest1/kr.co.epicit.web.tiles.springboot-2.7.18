@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration
+	xmlns="http://ch.qos.logback/xml/ns/logback"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://ch.qos.logback/xml/ns/logback https://raw.githubusercontent.com/enricopulatzo/logback-XSD/master/src/main/xsd/logback.xsd
+	"
+	scan="true" scanPeriod="30 seconds" 
+>
+	<property name="LOG_HOME" value="/logs/epicit.data.sync.log" />
+	<property name="LOG_FILE" value="logs/epicit.data.sync/epicit.data.sync.%d{yyyy-MM-dd}.%i.log" />
+	<property name="LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%t] %-5level %logger - %msg%n" />  <!-- %logger{36} -->
+
+	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>${LOG_PATTERN}</pattern>
+		</layout>
+	</appender>
+	<appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_HOME}</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_FILE}</fileNamePattern>
+			<maxFileSize>650MB</maxFileSize>  <!-- each archived file, size max 10MB -->
+			<totalSizeCap>20GB</totalSizeCap>  <!-- total size of all archive files, if total size > 20GB, it will delete  old archived file -->
+			<maxHistory>60</maxHistory>  <!-- 60 days to keep -->
+		</rollingPolicy>
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="asyncAppender" class="ch.qos.logback.classic.AsyncAppender">
+		<appender-ref ref="fileAppender" />
+	</appender>
+
+	<logger name="kr.co.epicit" level="debug" additivity="false">
+		<appender-ref ref="consoleAppender" />
+		<appender-ref ref="asyncAppender" />
+	</logger>
+
+	<root level="debug">
+		<appender-ref ref="consoleAppender" />
+		<appender-ref ref="asyncAppender" />
+	</root>
+	
+	<logger name="com.zaxxer.hikari" level="off" additivity="false" />
+	<logger name="org.apache.commons.digester" level="off" additivity="false" />
+	<logger name="org.springframework.boot.autoconfigure" level="off" additivity="false" />
+	<logger name="org.springframework.beans.factory.support" level="off" additivity="false" />
+	<logger name="org.apache.tiles.definition.dao.BaseLocaleUrlDefinitionDAO" level="off" additivity="false" />
+
+</configuration>
+
